@@ -64,6 +64,16 @@ fun BreedListScreen(
                 modifier = modifier
             )
         }
+
+        Button(
+            onClick = { onEvent(BreedListUiEvent.NextClicked) },
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = "Initiate Network",
+                modifier = modifier
+            )
+        }
     }
 }
 
