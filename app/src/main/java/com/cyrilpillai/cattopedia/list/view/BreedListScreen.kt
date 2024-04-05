@@ -1,10 +1,14 @@
 package com.cyrilpillai.cattopedia.list.view
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -14,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.cyrilpillai.cattopedia.list.view.model.BreedItem
 import com.cyrilpillai.cattopedia.list.view.model.BreedListUiEvent
 import com.cyrilpillai.cattopedia.list.view.model.BreedListUiState
 
@@ -45,35 +50,34 @@ fun BreedListScreen(
     ) {
         when (state) {
             is BreedListUiState.Success -> {
-                Text(
-                    text = state.greeting,
-                    modifier = modifier
-                        .padding(16.dp)
-                )
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(2)
+                ) {
+                    items(state.breeds) { BreedView(it) }
+                }
+            }
+
+            is BreedListUiState.Loading -> {
+                CircularProgressIndicator()
             }
 
             else -> Unit
         }
+    }
+}
 
-        Button(
-            onClick = onNextClicked,
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(
-                text = "Next",
-                modifier = modifier
-            )
-        }
-
-        Button(
-            onClick = { onEvent(BreedListUiEvent.NextClicked) },
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(
-                text = "Initiate Network",
-                modifier = modifier
-            )
-        }
+@Composable
+fun BreedView(
+    breedItem: BreedItem,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier
+            .height(130.dp)
+    ) {
+        Text(
+            text = breedItem.imageUrl
+        )
     }
 }
 
@@ -82,7 +86,14 @@ fun BreedListScreen(
 fun BreedListScreenPreview() {
     BreedListScreen(
         state = BreedListUiState.Success(
-            greeting = "Cattopedia is a demo app showcasing android best practices"
+            breeds = listOf(
+                BreedItem(
+                    id = "beng",
+                    name = "Bengal",
+                    origin = "India",
+                    imageUrl = "https://cdn2.thecatapi.com/images/IFXsxmXLm.jpg"
+                )
+            )
         ),
         onEvent = {},
         onNextClicked = {}

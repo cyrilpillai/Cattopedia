@@ -74,9 +74,12 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.converter.moshi)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
 
     ksp(libs.hilt.compiler)
     ksp(libs.moshi.codegen)
+    ksp(libs.room.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
