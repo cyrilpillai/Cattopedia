@@ -14,10 +14,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import coil.compose.AsyncImage
 import com.cyrilpillai.cattopedia.list.view.model.BreedItem
 import com.cyrilpillai.cattopedia.list.view.model.BreedListUiEvent
 import com.cyrilpillai.cattopedia.list.view.model.BreedListUiState
@@ -75,8 +77,12 @@ fun BreedView(
         modifier = modifier
             .height(130.dp)
     ) {
-        Text(
-            text = breedItem.imageUrl
+        AsyncImage(
+            model = breedItem.imageUrl,
+            contentDescription = "breed image",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxSize()
         )
     }
 }
