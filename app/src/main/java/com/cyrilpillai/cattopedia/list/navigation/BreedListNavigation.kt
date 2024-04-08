@@ -15,11 +15,11 @@ fun NavController.navigateToBreedListScreen(
 }
 
 fun NavGraphBuilder.breedListScreen(
-    onNextClicked: () -> Unit
+    onBreedClicked: (breedId: String) -> Unit
 ) {
     composable(
         route = BREED_LIST_ROUTE,
     ) {
-        BreedListRoute(onNextClicked)
+        BreedListRoute(onBreedClicked)
     }
 }

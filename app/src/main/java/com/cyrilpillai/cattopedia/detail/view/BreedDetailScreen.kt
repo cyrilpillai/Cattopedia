@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -14,12 +13,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.cyrilpillai.cattopedia.detail.view.model.BreedDetailItem
 import com.cyrilpillai.cattopedia.detail.view.model.BreedDetailUiEvent
 import com.cyrilpillai.cattopedia.detail.view.model.BreedDetailUiState
 
 @Composable
 fun BreedDetailRoute(
-    onPreviousClicked: () -> Unit,
     viewModel: BreedDetailViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -27,7 +26,6 @@ fun BreedDetailRoute(
     BreedDetailScreen(
         state,
         viewModel::onEvent,
-        onPreviousClicked
     )
 }
 
@@ -35,7 +33,6 @@ fun BreedDetailRoute(
 fun BreedDetailScreen(
     state: BreedDetailUiState,
     onEvent: (event: BreedDetailUiEvent) -> Unit,
-    onPreviousClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -46,23 +43,13 @@ fun BreedDetailScreen(
         when (state) {
             is BreedDetailUiState.Success -> {
                 Text(
-                    text = state.greeting,
+                    text = state.breedDetailItem.name,
                     modifier = modifier
                         .padding(16.dp)
                 )
             }
 
             else -> Unit
-        }
-
-        Button(
-            onClick = onPreviousClicked,
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(
-                text = "Previous",
-                modifier = modifier
-            )
         }
     }
 }
@@ -72,9 +59,13 @@ fun BreedDetailScreen(
 fun BreedDetailScreenPreview() {
     BreedDetailScreen(
         state = BreedDetailUiState.Success(
-            greeting = "This screen shows details of a specific cat breed"
+            BreedDetailItem(
+                id = "beng",
+                name = "Bengal",
+                origin = "India",
+                imageUrls = listOf("https://cdn2.thecatapi.com/images/IFXsxmXLm.jpg")
+            )
         ),
-        onEvent = {},
-        onPreviousClicked = {}
+        onEvent = {}
     )
 }
