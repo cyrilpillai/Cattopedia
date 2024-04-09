@@ -2,7 +2,9 @@ package com.cyrilpillai.cattopedia.core.network.di
 
 import com.cyrilpillai.cattopedia.BuildConfig
 import com.cyrilpillai.cattopedia.core.network.ApiService
+import com.cyrilpillai.cattopedia.core.network.adapter.BooleanAdapter
 import com.cyrilpillai.cattopedia.core.network.result.NetworkResultCallAdapterFactory
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,10 +42,19 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+    fun provideMoshi(): Moshi = Moshi.Builder()
+        .add(BooleanAdapter())
+        .build()
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(
+        okHttpClient: OkHttpClient,
+        moshi: Moshi
+    ): Retrofit = Retrofit.Builder()
         .baseUrl(BuildConfig.API_BASE_URL)
         .client(okHttpClient)
-        .addConverterFactory(MoshiConverterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
         .addCallAdapterFactory(NetworkResultCallAdapterFactory.create())
         .build()
 
