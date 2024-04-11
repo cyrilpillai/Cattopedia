@@ -21,6 +21,6 @@ fun CattopediaNavHost(
         startDestination = startDestination
     ) {
         breedListScreen(navController::navigateToBreedDetailScreen)
-        breedDetailScreen()
+        breedDetailScreen(navController::popBackStack)
     }
 }

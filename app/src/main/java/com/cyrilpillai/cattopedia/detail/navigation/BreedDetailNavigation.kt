@@ -19,7 +19,9 @@ fun NavController.navigateToBreedDetailScreen(
     navigate("$BREED_DETAIL_ROUTE_BASE/$breedId", navOptions)
 }
 
-fun NavGraphBuilder.breedDetailScreen() {
+fun NavGraphBuilder.breedDetailScreen(
+    onBackClicked: () -> Unit
+) {
     composable(
         route = BREED_DETAIL_ROUTE,
         arguments = listOf(navArgument(BREED_ID_ARG) {
@@ -28,6 +30,6 @@ fun NavGraphBuilder.breedDetailScreen() {
             defaultValue = null
         })
     ) {
-        BreedDetailRoute()
+        BreedDetailRoute(onBackClicked)
     }
 }

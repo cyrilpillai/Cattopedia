@@ -112,7 +112,6 @@ fun BreedView(
             contentDescription = "breed image",
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .fillMaxSize()
                 .onGloballyPositioned {
                     height = density.run { it.size.height.toDp() }
                 }
