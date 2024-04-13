@@ -16,6 +16,7 @@ import com.cyrilpillai.cattopedia.detail.view.components.Toolbar
 import com.cyrilpillai.cattopedia.detail.view.model.BreedDetailItem
 import com.cyrilpillai.cattopedia.detail.view.model.BreedDetailUiEvent
 import com.cyrilpillai.cattopedia.detail.view.model.BreedDetailUiState
+import com.cyrilpillai.cattopedia.detail.view.model.TemperamentItem
 
 @Composable
 fun BreedDetailRoute(
@@ -46,7 +47,7 @@ fun BreedDetailScreen(
             Box(modifier = modifier) {
                 val scrollState = rememberScrollState()
                 Body(
-                    description = state.breedDetailItem.description,
+                    breedDetailItem = state.breedDetailItem,
                     headerHeight = headerHeight,
                     scrollState = scrollState,
                 )
@@ -84,7 +85,12 @@ fun BreedDetailScreenPreview() {
                 name = "Bengal",
                 origin = "United States",
                 description = "Bengals are a lot of fun to live with, but they're definitely not the cat for everyone, or for first-time cat owners. Extremely intelligent, curious and active, they demand a lot of interaction and woe betide the owner who doesn't provide it.",
-                temperament = "Alert, Agile, Energetic, Demanding, Intelligent",
+                temperament = listOf(
+                    TemperamentItem(
+                        "Alert",
+                        0xFFFFFFFF
+                    )
+                ),
                 altNames = "",
                 lifeSpan = "12 - 15",
                 indoor = false,

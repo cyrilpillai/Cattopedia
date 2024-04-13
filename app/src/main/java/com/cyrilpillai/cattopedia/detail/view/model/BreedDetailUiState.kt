@@ -1,6 +1,7 @@
 package com.cyrilpillai.cattopedia.detail.view.model
 
 import com.cyrilpillai.cattopedia.core.database.relation.BreedWithImages
+import kotlin.random.Random
 
 sealed class BreedDetailUiState {
     data object Loading : BreedDetailUiState()
@@ -19,7 +20,7 @@ data class BreedDetailItem(
     val name: String,
     val origin: String,
     val description: String,
-    val temperament: String,
+    val temperament: List<TemperamentItem>,
     val altNames: String,
     val lifeSpan: String,
     val indoor: Boolean,
@@ -50,7 +51,9 @@ data class BreedDetailItem(
         name = breedWithImages.breed.name,
         origin = breedWithImages.breed.origin,
         description = breedWithImages.breed.description,
-        temperament = breedWithImages.breed.temperament,
+        temperament = breedWithImages.breed.temperament
+            .split(",")
+            .map { TemperamentItem(it) },
         altNames = breedWithImages.breed.altNames,
         lifeSpan = breedWithImages.breed.lifeSpan,
         indoor = breedWithImages.breed.indoor,
@@ -76,4 +79,11 @@ data class BreedDetailItem(
         hypoallergenic = breedWithImages.breed.hypoallergenic,
         imageUrls = breedWithImages.images.map { it.url }
     )
+}
+
+data class TemperamentItem(
+    val text: String,
+    val color: Long
+) {
+    constructor(text: String) : this(text, Random.nextLong(0xFFFFFFFF))
 }
