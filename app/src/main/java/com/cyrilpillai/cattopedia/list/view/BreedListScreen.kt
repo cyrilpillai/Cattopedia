@@ -6,9 +6,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
@@ -18,17 +18,12 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -95,11 +90,10 @@ fun BreedView(
     onBreedClicked: (breedId: String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val density = LocalDensity.current
-    var height by remember { mutableStateOf(0.dp) }
     Box(
         modifier = modifier
             .fillMaxWidth()
+            .aspectRatio(breedItem.imageAspectRatio)
             .shadow(
                 elevation = 2.dp,
                 shape = RoundedCornerShape(24.dp)
@@ -111,15 +105,11 @@ fun BreedView(
             placeholder = painterResource(id = R.drawable.ic_launcher_background),
             contentDescription = "breed image",
             contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .onGloballyPositioned {
-                    height = density.run { it.size.height.toDp() }
-                }
+            modifier = Modifier.fillMaxSize()
         )
         Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(height)
+                .fillMaxSize()
                 .background(
                     brush = Brush.verticalGradient(
                         colors = listOf(
@@ -154,7 +144,8 @@ fun BreedListScreenPreview() {
                     id = "beng",
                     name = "Bengal",
                     origin = "India",
-                    imageUrl = "https://cdn2.thecatapi.com/images/IFXsxmXLm.jpg"
+                    imageUrl = "https://cdn2.thecatapi.com/images/IFXsxmXLm.jpg",
+                    imageAspectRatio = 1f
                 )
             )
         ),

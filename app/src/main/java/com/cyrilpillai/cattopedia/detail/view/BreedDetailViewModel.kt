@@ -23,7 +23,7 @@ class BreedDetailViewModel @Inject constructor(
     val uiState: StateFlow<BreedDetailUiState> = breedDetailRepo.getBreed(
         savedStateHandle[BREED_ID_ARG]
     ).map {
-        BreedDetailUiState.Success(BreedDetailItem(it.copy(images = it.images + it.images + it.images)))
+        BreedDetailUiState.Success(BreedDetailItem(it.copy(images = it.images)))
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(),

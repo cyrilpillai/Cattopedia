@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.cyrilpillai.cattopedia.core.network.model.BreedResource
+import com.cyrilpillai.cattopedia.core.network.model.getAspectRatio
 
 @Entity(tableName = "breeds")
 data class BreedEntity(
@@ -35,7 +36,8 @@ data class BreedEntity(
     @ColumnInfo(name = "rex") val rex: Boolean,
     @ColumnInfo(name = "short_legs") val shortLegs: Boolean,
     @ColumnInfo(name = "hypoallergenic") val hypoallergenic: Boolean,
-    @ColumnInfo(name = "image_url") val imageUrl: String
+    @ColumnInfo(name = "image_url") val imageUrl: String,
+    @ColumnInfo(name = "image_aspect_ratio") val imageAspectRatio: Float
 ) {
     constructor(breedResource: BreedResource) : this(
         id = breedResource.id,
@@ -66,6 +68,7 @@ data class BreedEntity(
         rex = breedResource.rex,
         shortLegs = breedResource.shortLegs,
         hypoallergenic = breedResource.hypoallergenic,
-        imageUrl = breedResource.image?.url ?: ""
+        imageUrl = breedResource.image?.url.orEmpty(),
+        imageAspectRatio = breedResource.image.getAspectRatio()
     )
 }

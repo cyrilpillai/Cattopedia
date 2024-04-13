@@ -18,12 +18,14 @@ data class BreedItem(
     val id: String,
     val name: String,
     val origin: String,
-    val imageUrl: String
+    val imageUrl: String,
+    val imageAspectRatio: Float
 ) {
     constructor(breedEntity: BreedEntity) : this(
         id = breedEntity.id,
         name = breedEntity.name,
         origin = breedEntity.origin,
-        imageUrl = breedEntity.imageUrl
+        imageUrl = breedEntity.imageUrl,
+        imageAspectRatio = breedEntity.imageAspectRatio
     )
 }
