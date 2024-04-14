@@ -25,18 +25,6 @@ data class BreedDetailItem(
     val lifeSpan: String,
     val indoor: Boolean,
     val lap: Boolean,
-    val adaptability: Int,
-    val affectionLevel: Int,
-    val childFriendly: Int,
-    val dogFriendly: Int,
-    val strangerFriendly: Int,
-    val energyLevel: Int,
-    val grooming: Int,
-    val healthIssues: Int,
-    val intelligence: Int,
-    val sheddingLevel: Int,
-    val socialNeeds: Int,
-    val vocalisation: Int,
     val experimental: Boolean,
     val hairless: Boolean,
     val natural: Boolean,
@@ -44,9 +32,13 @@ data class BreedDetailItem(
     val rex: Boolean,
     val shortLegs: Boolean,
     val hypoallergenic: Boolean,
-    val imageUrls: List<String>
+    val imageUrls: List<String>,
+    val levels: List<LevelItem>
 ) {
-    constructor(breedWithImages: BreedWithImages) : this(
+    constructor(
+        breedWithImages: BreedWithImages,
+        levels: List<LevelItem>
+    ) : this(
         id = breedWithImages.breed.id,
         name = breedWithImages.breed.name,
         origin = breedWithImages.breed.origin,
@@ -58,18 +50,6 @@ data class BreedDetailItem(
         lifeSpan = breedWithImages.breed.lifeSpan,
         indoor = breedWithImages.breed.indoor,
         lap = breedWithImages.breed.lap,
-        adaptability = breedWithImages.breed.adaptability,
-        affectionLevel = breedWithImages.breed.affectionLevel,
-        childFriendly = breedWithImages.breed.childFriendly,
-        dogFriendly = breedWithImages.breed.dogFriendly,
-        strangerFriendly = breedWithImages.breed.strangerFriendly,
-        energyLevel = breedWithImages.breed.energyLevel,
-        grooming = breedWithImages.breed.grooming,
-        healthIssues = breedWithImages.breed.healthIssues,
-        intelligence = breedWithImages.breed.intelligence,
-        sheddingLevel = breedWithImages.breed.sheddingLevel,
-        socialNeeds = breedWithImages.breed.socialNeeds,
-        vocalisation = breedWithImages.breed.vocalisation,
         experimental = breedWithImages.breed.experimental,
         hairless = breedWithImages.breed.hairless,
         natural = breedWithImages.breed.natural,
@@ -77,7 +57,8 @@ data class BreedDetailItem(
         rex = breedWithImages.breed.rex,
         shortLegs = breedWithImages.breed.shortLegs,
         hypoallergenic = breedWithImages.breed.hypoallergenic,
-        imageUrls = breedWithImages.images.map { it.url }
+        imageUrls = breedWithImages.images.map { it.url },
+        levels = levels
     )
 }
 
@@ -87,3 +68,8 @@ data class TemperamentItem(
 ) {
     constructor(text: String) : this(text, Random.nextLong(0xFFFFFFFF))
 }
+
+data class LevelItem(
+    val title: String,
+    val level: Float
+)

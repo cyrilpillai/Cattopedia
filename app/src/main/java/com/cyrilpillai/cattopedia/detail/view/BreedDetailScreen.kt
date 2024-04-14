@@ -16,6 +16,7 @@ import com.cyrilpillai.cattopedia.detail.view.components.Toolbar
 import com.cyrilpillai.cattopedia.detail.view.model.BreedDetailItem
 import com.cyrilpillai.cattopedia.detail.view.model.BreedDetailUiEvent
 import com.cyrilpillai.cattopedia.detail.view.model.BreedDetailUiState
+import com.cyrilpillai.cattopedia.detail.view.model.LevelItem
 import com.cyrilpillai.cattopedia.detail.view.model.TemperamentItem
 
 @Composable
@@ -95,18 +96,6 @@ fun BreedDetailScreenPreview() {
                 lifeSpan = "12 - 15",
                 indoor = false,
                 lap = false,
-                adaptability = 5,
-                affectionLevel = 5,
-                childFriendly = 4,
-                dogFriendly = 5,
-                strangerFriendly = 3,
-                energyLevel = 5,
-                grooming = 1,
-                healthIssues = 3,
-                intelligence = 5,
-                sheddingLevel = 3,
-                socialNeeds = 5,
-                vocalisation = 5,
                 experimental = false,
                 hairless = false,
                 natural = false,
@@ -117,6 +106,12 @@ fun BreedDetailScreenPreview() {
                 imageUrls = listOf(
                     "https://cdn2.thecatapi.com/images/IFXsxmXLm.jpg",
                     "https://cdn2.thecatapi.com/images/IFXsxmXLm.jpg"
+                ),
+                levels = listOf(
+                    LevelItem(
+                        title = "Adaptability",
+                        level = 4f
+                    )
                 )
             )
         ),
