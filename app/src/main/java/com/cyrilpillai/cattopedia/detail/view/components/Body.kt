@@ -1,5 +1,6 @@
 package com.cyrilpillai.cattopedia.detail.view.components
 
+import android.util.Log
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -93,6 +94,7 @@ fun Temperament(
     temperament: List<TemperamentItem>,
     modifier: Modifier = Modifier
 ) {
+    Log.d("Cattopedia", "Temperament $temperament")
     Column(
         modifier = modifier
             .fillMaxWidth()
