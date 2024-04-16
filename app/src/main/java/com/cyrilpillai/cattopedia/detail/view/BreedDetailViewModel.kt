@@ -30,7 +30,7 @@ class BreedDetailViewModel @Inject constructor(
         BreedDetailUiState.Success(
             BreedDetailItem(
                 breedWithImages = it.copy(images = it.images),
-                temperament = getTemperament(it.breed),
+                temperament = getTemperaments(it.breed),
                 levels = getLevels(it.breed)
             )
         )
@@ -48,56 +48,68 @@ class BreedDetailViewModel @Inject constructor(
         return listOf(
             LevelItem(
                 title = "Adaptability",
-                level = breed.adaptability / maxLevel
+                level = breed.adaptability / maxLevel,
+                color = 0xFF78909C
             ),
             LevelItem(
                 title = "Affection",
-                level = breed.affectionLevel / maxLevel
+                level = breed.affectionLevel / maxLevel,
+                color = 0xFFEC407A
             ),
             LevelItem(
                 title = "Child Friendly",
-                level = breed.childFriendly / maxLevel
+                level = breed.childFriendly / maxLevel,
+                color = 0xFF03A9f4
             ),
             LevelItem(
                 title = "Dog Friendly",
-                level = breed.dogFriendly / maxLevel
+                level = breed.dogFriendly / maxLevel,
+                color = 0xFF795548
             ),
             LevelItem(
                 title = "Stranger Friendly",
-                level = breed.strangerFriendly / maxLevel
+                level = breed.strangerFriendly / maxLevel,
+                color = 0xFF43A047
             ),
             LevelItem(
                 title = "Energy",
-                level = breed.energyLevel / maxLevel
+                level = breed.energyLevel / maxLevel,
+                color = 0xFFFFFF00
             ),
             LevelItem(
                 title = "Grooming",
-                level = breed.grooming / maxLevel
+                level = breed.grooming / maxLevel,
+                color = 0xFF06292
             ),
             LevelItem(
                 title = "Health Issues",
-                level = breed.healthIssues / maxLevel
+                level = breed.healthIssues / maxLevel,
+                color = 0xFF1976D2
             ),
             LevelItem(
                 title = "Intelligence",
-                level = breed.intelligence / maxLevel
+                level = breed.intelligence / maxLevel,
+                color = 0xFF00ACC1
             ),
             LevelItem(
                 title = "Shedding",
-                level = breed.sheddingLevel / maxLevel
+                level = breed.sheddingLevel / maxLevel,
+                color = 0xFFD7CCC8
             ),
             LevelItem(
                 title = "Social Needs",
-                level = breed.socialNeeds / maxLevel
+                level = breed.socialNeeds / maxLevel,
+                color = 0xFFEEFF41
             ),
             LevelItem(
                 title = "Vocalisation",
-                level = breed.vocalisation / maxLevel
+                level = breed.vocalisation / maxLevel,
+                color = 0xFF64DD17
             )
         )
     }
 
-    private fun getTemperament(breed: BreedEntity): List<TemperamentItem> {
+    private fun getTemperaments(breed: BreedEntity): List<TemperamentItem> {
         return breed.temperament.split(",")
             .map { it.trim() }
             .map {

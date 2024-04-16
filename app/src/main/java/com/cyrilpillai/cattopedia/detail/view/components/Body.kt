@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.cyrilpillai.cattopedia.detail.view.model.BreedDetailItem
+import com.cyrilpillai.cattopedia.detail.view.model.LevelItem
 import com.cyrilpillai.cattopedia.detail.view.model.TemperamentItem
 
 @Composable
@@ -54,8 +55,7 @@ fun Body(
 
         breedDetailItem.levels.forEach {
             LevelIndicator(
-                headerText = it.title,
-                progress = it.level,
+                levelItem = it,
                 modifier = Modifier
                     .padding(
                         top = 16.dp
@@ -132,21 +132,23 @@ fun Temperament(
 
 @Composable
 fun LevelIndicator(
-    headerText: String,
-    progress: Float,
+    levelItem: LevelItem,
     modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier
             .fillMaxWidth()
     ) {
+        val color = Color(levelItem.color)
         Text(
-            text = headerText,
+            text = levelItem.title,
             style = MaterialTheme.typography.titleMedium
         )
         LinearProgressIndicator(
-            progress = { progress },
+            progress = { levelItem.level },
             strokeCap = StrokeCap.Round,
+            color = color,
+            trackColor = color.copy(alpha = 0.2f),
             modifier = Modifier
                 .fillMaxWidth()
                 .height(16.dp)

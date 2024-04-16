@@ -110,7 +110,8 @@ fun BreedDetailScreenPreview() {
                 levels = listOf(
                     LevelItem(
                         title = "Adaptability",
-                        level = 4f
+                        level = 4f,
+                        color = 0xFF78909C
                     )
                 )
             )

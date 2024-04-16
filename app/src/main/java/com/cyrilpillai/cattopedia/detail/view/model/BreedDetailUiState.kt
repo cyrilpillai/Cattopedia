@@ -67,5 +67,6 @@ data class TemperamentItem(
 
 data class LevelItem(
     val title: String,
-    val level: Float
+    val level: Float,
+    val color: Long
 )
