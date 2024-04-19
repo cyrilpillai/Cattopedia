@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -39,6 +40,15 @@ class BreedDetailViewModel @Inject constructor(
         started = SharingStarted.WhileSubscribed(),
         initialValue = BreedDetailUiState.Loading
     )
+
+    init {
+        viewModelScope.launch {
+            val breedId: String? = savedStateHandle[BREED_ID_ARG]
+            if (breedDetailRepo.getBreedImagesCount(breedId) < 2) {
+                breedDetailRepo.fetchBreedImages(breedId)
+            }
+        }
+    }
 
     fun onEvent(event: BreedDetailUiEvent) {
     }

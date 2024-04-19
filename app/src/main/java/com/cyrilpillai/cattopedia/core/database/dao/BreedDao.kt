@@ -34,4 +34,7 @@ interface BreedDao {
     @Transaction
     @Query("SELECT * FROM breeds WHERE id = :breedId")
     fun getBreedWithImages(breedId: String): Flow<BreedWithImages>
+
+    @Query("SELECT COUNT(id) FROM breed_images WHERE id = :breedId")
+    suspend fun getBreedImagesCount(breedId: String): Int
 }
