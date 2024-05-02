@@ -45,7 +45,7 @@ data class BreedDetailItem(
         description = breedWithImages.breed.description,
         temperament = temperament,
         altNames = breedWithImages.breed.altNames,
-        lifeSpan = breedWithImages.breed.lifeSpan,
+        lifeSpan = breedWithImages.breed.lifeSpan.plus(" years"),
         indoor = breedWithImages.breed.indoor,
         lap = breedWithImages.breed.lap,
         experimental = breedWithImages.breed.experimental,

@@ -37,30 +37,23 @@ fun Body(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier
             .verticalScroll(scrollState)
-            .padding(20.dp)
+            .padding(horizontal = 16.dp)
     ) {
         Spacer(Modifier.height(headerHeight))
 
         Description(breedDetailItem.description)
 
-        Temperament(
-            temperament = breedDetailItem.temperament,
-            modifier = Modifier
-                .padding(
-                    top = 16.dp
-                )
-        )
+        Origin(breedDetailItem.origin)
+
+        LifeSpan(breedDetailItem.lifeSpan)
+
+        Temperament(breedDetailItem.temperament)
 
         breedDetailItem.levels.forEach {
-            LevelIndicator(
-                levelItem = it,
-                modifier = Modifier
-                    .padding(
-                        top = 16.dp
-                    )
-            )
+            LevelIndicator(it)
         }
     }
 }
@@ -72,6 +65,7 @@ fun Description(
 ) {
     Column(
         modifier = modifier
+            .fillMaxWidth()
     ) {
         Text(
             text = "Description",
@@ -81,9 +75,51 @@ fun Description(
             text = description,
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier
-                .padding(
-                    top = 8.dp
-                )
+                .padding(top = 8.dp)
+        )
+    }
+}
+
+@Composable
+fun Origin(
+    origin: String,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+    ) {
+        Text(
+            text = "Origin",
+            style = MaterialTheme.typography.titleMedium
+        )
+        Text(
+            text = origin,
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier
+                .padding(top = 8.dp)
+        )
+    }
+}
+
+@Composable
+fun LifeSpan(
+    lifeSpan: String,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+    ) {
+        Text(
+            text = "Life Span",
+            style = MaterialTheme.typography.titleMedium
+        )
+        Text(
+            text = lifeSpan,
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier
+                .padding(top = 8.dp)
         )
     }
 }
@@ -107,9 +143,7 @@ fun Temperament(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier
-                .padding(
-                    top = 8.dp
-                )
+                .padding(top = 8.dp)
         ) {
             temperament.forEach {
                 Text(
@@ -152,9 +186,7 @@ fun LevelIndicator(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(16.dp)
-                .padding(
-                    top = 8.dp
-                )
+                .padding(top = 8.dp)
         )
     }
 }
